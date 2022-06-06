@@ -1,0 +1,27 @@
+server:
+  port: 1988
+spring:
+  application:
+    name: ps-new-world-manage
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+    encoding: UTF-8
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.77.37.3:8848 # nacos地址
+        service: ${spring.application.name} # 服务名称
+        namespace: 85bb773b-92f0-4235-ad38-659040cda7f1 # 命名空间
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: 85bb773b-92f0-4235-ad38-659040cda7f1
+        encode: utf-8
+        file-extension: yml #配置文件后缀
+        shared-configs: ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+logging:
+  level:
+    com.alibaba.nacos: warn # 限制控制台输出nacos日志

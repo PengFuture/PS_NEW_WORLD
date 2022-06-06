@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.world.mapper.SystemRoleMapper">
+    <select id="selectRolePermissionByUserId" parameterType="Long" resultType="com.china.world.domain.SystemRole">
+        select distinct sr.role_id,
+                        sr.role_name,
+                        sr.role_key,
+                        sr.role_sore,
+                        sr.data_scope,
+                        sr.menu_check_strictly,
+                        sr.status,
+                        sr.create_by,
+                        sr.create_time,
+                        sr.update_by,
+                        sr.update_time,
+                        sr.remark
+        from system_role sr
+                 left join system_user_role sur on sr.role_id = sur.role_id
+                 left join system_user su on sur.user_id = su.user_id
+        where su.user_id = #{userId};
+    </select>
+</mapper>

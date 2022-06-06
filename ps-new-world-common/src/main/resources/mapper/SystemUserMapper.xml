@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.china.world.mapper.SystemUserMapper">
+
+    <update id="updateIpAndTimeById">
+        update system_user
+        <set>
+            <if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
+            <if test="loginDate != null">login_date = #{loginDate},</if>
+            update_time = now()
+        </set>
+        where user_id = #{userId}
+    </update>
+</mapper>
